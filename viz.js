@@ -82,7 +82,7 @@ legend.append("text")
     .attr("y", 70)
     .text(function(d, i){ return labels[i] })
 
-var legend_title = "Number of Coronavirus Cases"
+var legend_title = "Density of Coronavirus Cases"
 
 legend.append("text")
     .attr("x", 417)
