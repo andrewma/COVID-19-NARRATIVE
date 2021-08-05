@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Coronavirus Pandemic Narrative: US Perspective</title>
+<script src="https://d3js.org/d3.v5.js"></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+
+
+<!-- CSS -->
+<style>
+ 
+body, h1, h2, h3, p {
+  margin: 0;
+  padding: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 1em;
+  color: #333;
+  font-weight: 400;
+}
+
+h1, h2 {
+  line-height: 1em;
+  font-size: 1.75em;
+  font-weight: 900;
+  color: #000;
+}
+
+h2.date, h2.interval {
+  margin: 10px 0px 0px 0px;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+#content {
+  margin: 5px;
+  padding: 20px;
+  width: 805px;
+  border: 1px solid #ccc;
+}
+
+#map {
+  margin: 10px 0px 0px 0px;
+  padding: 0px;
+}
+
+h3 {
+  font-size: 1.25em;
+  margin: 0px 0px 0px 0px;
+  font-weight: 900;
+}
+
+
+.states {
+  fill: none;
+  stroke: black;
+  stroke-width: 0.5px;
+  stroke-linejoin: round;
+}
+
+input {
+  display: block;
+  width: 200px;
+  margin: 10px 0px 0px 0px;
+}
+
+p {
+  margin: 10px 0px 0px 0px;
+}
+
+.counties {
+  position: absolute;
+}
+
+
+.tooltip p {
+  margin: 0;
+  padding: 0;
+}
+
+.tooltip table {
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+}
+
+#legend text {
+  font-size: 0.9em;
+  color: #333;
+  font-weight: 400;
+}
+
+.tooltip {
+  position: absolute;
+  padding: 10px;
+  margin: 10px;
+  font-size: 0.9em;
+  pointer-events: none;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  -moz-box-shadow:    3px 3px 10px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.25);
+  box-shadow:         3px 3px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.wide {
+  width: 140px;
+}
+</style>
+<script src="https://unpkg.com/topojson@3"></script>
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400italic,600italic,700italic,200,300,400,600,700,900">
+<!--JS-->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<!--CSS-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div style="width: 90%; margin: 10px;">
+    <h1 style="text-align:center">Coronavirus Pandemic Narrative: United States Perspective</h1>
+    <h6 style="text-align:center">Visualization takes twenty seconds to show up due to large dataset</h6>
+    
+    <table>
+      <tr>
+        <td style="width: 300px;">
+          <div id="info">
+            <h2 class="interval"></h2>
+            <div class="slider-interval"></div>
+            <h2 class="date"></h2>
+            <div class="slider"></div>
+          </div>
+        </td>
+        <td style="width: 400px;"></td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td valign="top" width="1000px">
+          <svg id="map"></svg>
+          <svg id="legend"></svg>
+        </td>
+        <td valign="top">
+          <div class="tooltip"></div>
+        </td>
+        <td valign="right" width = "800px">
+          <h1>COVID DEVELOPMENTS</h2>
+          <h5 class="date-text"></h5>
+        </td>
+      </tr>
+    </table>
+    <p>*Hover over the counties to see confirmed cases and death count. Do not click down on the map because there is a bug.</p>
+    <p><b>Data Source</b>: <a href="https://github.com/nytimes/covid-19-data">https://github.com/nytimes/covid-19-data</a></p>
+    <p><b>Covid Developments Data Source</b>: <a href="https://www.ajmc.com/view/a-timeline-of-covid19-developments-in-2020">https://www.ajmc.com/view/a-timeline-of-covid19-developments-in-2020</a></p>
+    <script src="viz.js"></script>
+    <br>
+</div>
+
+</html>
